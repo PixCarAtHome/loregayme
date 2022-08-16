@@ -9,7 +9,7 @@ getgenv().DownwardStrike = false;
 getgenv().CrushingStrike = false;
 getgenv().FrontThrust = false;
 getgenv().Shatter = false;
-getgenv().Dodge = false
+getgenv().Dodge = false;
 
 local remoteFolder = game:GetService("ReplicatedStorage").Events
 
