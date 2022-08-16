@@ -133,7 +133,7 @@ venyx:setTheme(setting, color3)
 end)
 end
 
-stngs:addKeybind("Toggle GUI", Enum.KeyCode.Semicolon, function()
+stngs:addKeybind("Toggle GUI", Enum.KeyCode.BackSlash, function()
 venyx:toggle()
 end, function()
 end)
