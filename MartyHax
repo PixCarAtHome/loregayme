@@ -9,6 +9,7 @@ getgenv().DownwardStrike = false;
 getgenv().CrushingStrike = false;
 getgenv().FrontThrust = false;
 getgenv().Shatter = false;
+getgenv().Dodge = false
 
 local remoteFolder = game:GetService("ReplicatedStorage").Events
 
@@ -36,6 +37,7 @@ local section1 = page:addSection("Axe")
 local section2 = page:addSection("Mace")
 local section3 = page:addSection("Sword")
 local section4 = page:addSection("Zweihander")
+local section5 = page:addSection("Universal")
 
 section1:addToggle("Shaman", nil, function(bool)
     getgenv().Debuff = bool
@@ -114,6 +116,13 @@ section4:addToggle("Shatter", nil, function(bool)
     end
 end)
 
+section5:addToggle("I-Frame", nil, function(bool)
+    getgenv().Dodge = bool
+    if bool == true then
+        iFrame()
+    end
+end)
+
 local setting = venyx:addPage("Settings", 9771733052)
 local colors = setting:addSection("Colors")
 local stngs = setting:addSection("Settings")
@@ -124,7 +133,7 @@ venyx:setTheme(setting, color3)
 end)
 end
 
-stngs:addKeybind("Toggle GUI", Enum.KeyCode.E, function()
+stngs:addKeybind("Toggle GUI", Enum.KeyCode.Semicolon, function()
 venyx:toggle()
 end, function()
 end)
@@ -327,6 +336,20 @@ spawn(function()
         
         remoteFolder.ClientRequest:FireServer(unpack(args))
        wait (0.5)
+       end
+end)
+end
+
+function iFrame()
+spawn(function()
+     while Dodge == true do
+        local args = {
+            [1] = "DodgeSound"
+        }
+
+
+        game:GetService("Players").LocalPlayer.Character.StarterCharacter.Character.Function:FireServer(unpack(args))
+       wait (0.01)
        end
 end)
 end
