@@ -1,18 +1,5 @@
-getgenv().Debuff = false;
-getgenv().Judgement = false;
-getgenv().Roundhouse = false;
-getgenv().Uppercut = false;
-getgenv().Bonk = false;
-getgenv().Throw = false;
-getgenv().DoubleStrike = false;
-getgenv().DownwardStrike = false;
-getgenv().CrushingStrike = false;
-getgenv().FrontThrust = false;
-getgenv().Shatter = false;
-getgenv().Dodge = false
 
 local remoteFolder = game:GetService("ReplicatedStorage").Events
-
 
 shared.VapeIndependent = true
 shared.CustomSaveVape = "Martyhax"
@@ -23,21 +10,11 @@ local Blatant = uilib["ObjectsThatCanBeSaved"]["BlatantWindow"]["Api"]
 local Render = uilib["ObjectsThatCanBeSaved"]["RenderWindow"]["Api"]
 local Utility = uilib["ObjectsThatCanBeSaved"]["UtilityWindow"]["Api"]
 
-local Shaman = Blatant.CreateOptionsButton
+local Shaman = {["Enabled"] = false}
+    Shaman = Blatant.CreateOptionsButton({
     ["Name"] = "Shaman", -- name of object
     ["Function"] = function(callback) -- function that is called when toggled
         if callback then
-            print("Toggle Enabled")
-        else
-            print("Toggle Disabled")
-        end
-    end,
-    ["Default"] = true -- Value upon launch (optional)
-})
-
-function Shaman()
-    spawn(function()
-        while Debuff == true do
             local args = {
                 [1] = "custom",
                 [2] = "server2",
@@ -45,69 +22,85 @@ function Shaman()
                 [4] = CFrame.new(),
                 [5] = 2
             }
+                
+            game:GetService("ReplicatedStorage").Events.ClientRequest:FireServer(unpack(args))
+            Shaman["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
+
+local Judgement = {["Enabled"] = false}
+    Judgement = Blatant.CreateOptionsButton({
+    ["Name"] = "Judgement", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "Judgement",
+                [4] = CFrame.new(),
+                [5] = 1
+            }
+                
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            Judgement["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
+
+local Roundhouse = {["Enabled"] = false}
+    Roundhouse = Blatant.CreateOptionsButton({
+    ["Name"] = "Roundhouse", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "LowRoundhouse",
+                [4] = CFrame.new()
+            }
             
             remoteFolder.ClientRequest:FireServer(unpack(args))
-           wait (0.5)
-           end
-    end)
-    end
+            Roundhouse["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
+local Uppercut = {["Enabled"] = false}
+    Uppercut = Blatant.CreateOptionsButton({
+    ["Name"] = "Uppercut", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "Uppercut",
+                [4] = CFrame.new()
+            }
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            Uppercut["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-function Jdgmnt()
-spawn(function()
-    while Judgement == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "Judgement",
-            [4] = CFrame.new(),
-            [5] = 1
-        }
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-
-function Rndhse()
-spawn(function()
-    while Roundhouse == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "LowRoundhouse",
-            [4] = CFrame.new()
-        }
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-
-function Uprcut()
-spawn(function()
-    while Uppercut == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "Uppercut",
-            [4] = CFrame.new()
-        }
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-
-function Bnk()
-spawn(function()
-    while Bonk == true do
+local Bonk = {["Enabled"] = false}
+    Bonk = Blatant.CreateOptionsButton({
+    ["Name"] = "Bonk", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
         local args = {
             [1] = "custom",
             [2] = "server2",
@@ -118,15 +111,19 @@ spawn(function()
 
         
         remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
+            Uppercut["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-
-function MOHThrow()
-    spawn(function()
-        while Throw == true do
+local ShieldThrow = {["Enabled"] = false}
+    ShieldThrow = Blatant.CreateOptionsButton({
+    ["Name"] = "Shield Throw", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
             local args = {
                 [1] = "custom",
                 [2] = "server2",
@@ -137,112 +134,124 @@ function MOHThrow()
     
             
             remoteFolder.ClientRequest:FireServer(unpack(args))
-           wait (0.5)
-           end
-    end)
-    end
+            ShieldThrow["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
+local DoubleStrike = {["Enabled"] = false}
+    DoubleStrike = Blatant.CreateOptionsButton({
+    ["Name"] = "Double Strike", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "DoubleStrike",
+                [4] = CFrame.new(),
+                [5] = true
+            }
+    
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            DoubleStrike["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-function DStk()
-spawn(function()
-    while DoubleStrike == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "DoubleStrike",
-            [4] = CFrame.new(),
-            [5] = true
-        }
+local DownwardStrike = {["Enabled"] = false}
+    DownwardStrike = Blatant.CreateOptionsButton({
+    ["Name"] = "Downward Strike", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "DownwardStrike",
+                [4] = CFrame.new(),
+            }
+    
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            DownwardStrike["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
+local CrushingStrike = {["Enabled"] = false}
+    CrushingStrike = Blatant.CreateOptionsButton({
+    ["Name"] = "Crushing Strike", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "CrushingStrike",
+                [4] = CFrame.new(),
+            }
+    
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            CrushingStrike["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
+local FrontThrust = {["Enabled"] = false}
+    FrontThrust = Blatant.CreateOptionsButton({
+    ["Name"] = "Front Thrust", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "FrontThrust",
+                [4] = CFrame.new(),
+            }
+    
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            FrontThrust["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-function DWStk()
-spawn(function()
-    while DownwardStrike == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "DownwardStrike",
-            [4] = CFrame.new()
-        }
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
+local Shatter = {["Enabled"] = false}
+    Shatter = Blatant.CreateOptionsButton({
+    ["Name"] = "Shatter", -- name of object
+    ["Function"] = function(callback) -- function that is called when toggled
+        if callback then
+            local args = {
+                [1] = "custom",
+                [2] = "server2",
+                [3] = "Shatter",
+                [4] = CFrame.new(),
+                [5] = 1
+            }
+    
+            
+            remoteFolder.ClientRequest:FireServer(unpack(args))
+            Shatter["ToggleButton"](false)
+        end
+    end,
+    ["HoverText"] = "Fires a remoteevent", -- text that will show up after hovering over the button (optional)
+    ["Default"] = false, -- enabled on startup (optional)
+    ["ExtraText"] = "Single" -- text that goes next to the button in Text GUI (optional)
+})
 
-
-function CrStk()
-spawn(function()
-    while CrushingStrike == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "CrushingStrike",
-            [4] = CFrame.new(),
-        }
-
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-
-function FrThrust()
-spawn(function()
-    while FrontThrust == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "FrontThrust",
-            [4] = CFrame.new(),
-        }
-
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-
-function Shtr()
-spawn(function()
-    while Shatter == true do
-        local args = {
-            [1] = "custom",
-            [2] = "server2",
-            [3] = "Shatter",
-            [4] = CFrame.new(),
-            [5] = 1
-        }
-
-        
-        remoteFolder.ClientRequest:FireServer(unpack(args))
-       wait (0.5)
-       end
-end)
-end
-
-function iFrame()
-spawn(function()
-     while Dodge == true do
-        local args = {
-            [1] = "DodgeSound"
-        }
-
-
-        game:GetService("Players").LocalPlayer.Character.StarterCharacter.Character.Function:FireServer(unpack(args))
-       wait (0.01)
-       end
-end)
-end
+shared.VapeManualLoad = true
